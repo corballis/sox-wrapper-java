@@ -4,10 +4,22 @@ The majority of the arguments are not implemented yet, but
 
 The project does not include the binary of the sox itself;
 
+## How to use
+
+```
+<dependency>
+    <groupId>ie.corballis</groupId>
+    <artifactId>sox-wrapper-java</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+```
+
 ## Code Examples
 
-A simple example of how to re-sample a stereo audio file and extract it's left channel into a new file.
-```
+### Simple sox usage
+The code below represents the following code in the CLI:
+```sox --rate 16000 input.wav --encoding signed-integer --bits 16 output.wav remix 1 ```
+
 SoX sox = new SoX("/usr/bin/sox");
         sox
             .sampleRate(16000)
@@ -20,6 +32,8 @@ SoX sox = new SoX("/usr/bin/sox");
     }
 ```
 
+### Pass unimplemented arguments to the sox
+
 If an argument, you are looking for is not implemented yet, feel free to open an issue, or simply use the
  `SoX argument(String ...args)` method to pass custom arguments to the sox.
 ```
@@ -31,7 +45,9 @@ SoX sox = new SoX("/usr/bin/sox");
     }
 ```
 
-Use the sox wrapper with the Spring Framework
+### Sox with Spring Framework
+This is a recommendation, how to integrate the sox java wrapper with the Spring Framework
+
 ```
 
 import org.springframework.context.annotation.Bean;
