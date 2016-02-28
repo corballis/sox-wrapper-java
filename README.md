@@ -20,6 +20,7 @@ The project does not include the binary of the sox itself;
 The code below represents the following code in the CLI:
 ```sox --rate 16000 input.wav --encoding signed-integer --bits 16 output.wav remix 1 ```
 
+```
 SoX sox = new SoX("/usr/bin/sox");
         sox
             .sampleRate(16000)
@@ -49,7 +50,6 @@ SoX sox = new SoX("/usr/bin/sox");
 This is a recommendation, how to integrate the sox java wrapper with the Spring Framework
 
 ```
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
