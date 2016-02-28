@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class SoxArgumentTester {
+public class ArgumentTester {
 
     @Test
     public void testArguments() throws WrongParametersException {
