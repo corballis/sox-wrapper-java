@@ -24,6 +24,8 @@ public class SoX {
 
     private boolean outputFileSet = false;
 
+    private boolean hasBeenExecuted = false;
+
     public SoX(String soxPath) {
         this.soXBinaryPath = soxPath;
     }
@@ -104,7 +106,10 @@ public class SoX {
         return this;
     }
 
-    public void execute() throws IOException, WrongParametersException {
+    public void execute() throws IOException, WrongParametersException, AlreadyExecutedException {
+        if (hasBeenExecuted) {
+            throw new AlreadyExecutedException("The execute() method cannot be called twice");
+        }
         File soxBinary = new File(soXBinaryPath);
         if (!soxBinary.exists()) {
             throw new FileNotFoundException("SoX binary is not available under the following path: " + soXBinaryPath);

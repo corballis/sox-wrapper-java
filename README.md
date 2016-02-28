@@ -1,8 +1,15 @@
 # sox-wrapper-java
-Java wrapper around the famous SOX (https://sourceforge.net/projects/sox/) audio processing command line tool.
-The majority of the arguments are not implemented yet, but
+Java wrapper around the famous [sox](https://sourceforge.net/projects/sox/) audio processing tool.
+Please note that the sox executable is not part of this project. This is a wrapper application only that points to the
+executable.
 
-The project does not include the binary of the sox itself;
+Few of the arguments are not implemented yet, but with the help of the `SoX argument(String ...args)` method
+any kind of parameter can be added to the parameter list.
+
+Although the constructor of the SoX class requires the user to provide the full path of the sox executable,
+it may not be a good idea to hard-code file system paths to java code. Use property files or environment variables instead.
+
+Have a nice coding :)
 
 ## How to use
 

@@ -32,7 +32,6 @@
     </developers>
 
     <scm>
-
         <connection>scm:git:git@github.com:corballis/sox-wrapper-java.git</connection>
         <url>scm:git:git@github.com:corballis/sox-wrapper-java.git</url>
         <developerConnection>scm:git:git@github.com:corballis/sox-wrapper-java.git</developerConnection>
