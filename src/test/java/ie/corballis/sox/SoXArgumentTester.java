@@ -2,18 +2,17 @@ package ie.corballis.sox;
 
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class SoXArgumentTester {
+public class SoxArgumentTester {
 
     @Test
     public void testArguments() throws WrongParametersException {
-        SoX soX = new SoX("/usr/local/bin/sox");
-        List<String> arguments = soX
+        Sox sox = new Sox("/usr/local/bin/sox");
+        List<String> arguments = sox
                 .sampleRate(16000)
                 .inputFile("input.wav")
                 .outputFile("output.wav")

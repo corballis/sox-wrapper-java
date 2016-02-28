@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SoX {
+public class Sox {
 
-    private static Logger logger = LoggerFactory.getLogger(SoX.class);
+    private static Logger logger = LoggerFactory.getLogger(Sox.class);
 
     private final String soXBinaryPath;
 
@@ -26,46 +26,46 @@ public class SoX {
 
     private boolean hasBeenExecuted = false;
 
-    public SoX(String soxPath) {
+    public Sox(String soxPath) {
         this.soXBinaryPath = soxPath;
     }
 
-    public SoX ignoreLength() {
+    public Sox ignoreLength() {
         arguments.add("--ignore-length");
         formatOptionSet = true;
         return this;
     }
 
     // format options
-    public SoX fileType(AudioFileFormat format) {
+    public Sox fileType(AudioFileFormat format) {
         arguments.add("--type");
         arguments.add(format.toString());
         return this;
     }
 
-    public SoX encoding(SoXEncoding encoding) {
+    public Sox encoding(SoXEncoding encoding) {
         arguments.add("--encoding");
         arguments.add(encoding.toString());
         return this;
     }
 
-    public SoX bits(Integer bits) {
+    public Sox bits(Integer bits) {
         arguments.add("--bits");
         arguments.add(bits.toString());
         return this;
     }
 
-    public SoX reverseNibbles() {
+    public Sox reverseNibbles() {
         arguments.add("--reverse-nibbles");
         return this;
     }
 
-    public SoX reverseBits() {
+    public Sox reverseBits() {
         arguments.add("--reverse-bits");
         return this;
     }
 
-    public SoX sampleRate(Integer sample) {
+    public Sox sampleRate(Integer sample) {
         arguments.add("--rate");
         arguments.add(sample.toString());
         formatOptionSet = true;
@@ -73,13 +73,13 @@ public class SoX {
     }
 
 // global options
-    public SoX verbose(Integer level) {
+    public Sox verbose(Integer level) {
         arguments.add("-V" + level.toString());
         globalOptionSet = true;
         return this;
     }
 
-    public SoX effect(SoXEffect effect, String ... effectArguments) {
+    public Sox effect(SoXEffect effect, String ... effectArguments) {
         arguments.add(effect.toString());
         for (String effectArgument : effectArguments) {
             arguments.add(effectArgument);
@@ -87,17 +87,17 @@ public class SoX {
         return this;
     }
 
-    public SoX argument(String ... arguments) {
+    public Sox argument(String ... arguments) {
         Collections.addAll(this.arguments, arguments);
         return this;
     }
 
-    public SoX inputFile(String inputFile) {
+    public Sox inputFile(String inputFile) {
         arguments.add(inputFile);
         return this;
     }
 
-    public SoX outputFile(String outputFile) throws WrongParametersException {
+    public Sox outputFile(String outputFile) throws WrongParametersException {
         if (inputFileSet) {
             throw new WrongParametersException("The output file has to be later then an input file");
         }
@@ -112,14 +112,14 @@ public class SoX {
         }
         File soxBinary = new File(soXBinaryPath);
         if (!soxBinary.exists()) {
-            throw new FileNotFoundException("SoX binary is not available under the following path: " + soXBinaryPath);
+            throw new FileNotFoundException("Sox binary is not available under the following path: " + soXBinaryPath);
         }
 
         if (!outputFileSet) {
             throw new WrongParametersException("The output file argument is missing");
         }
         arguments.add(0, soXBinaryPath);
-        logger.debug("SoX arguments: {}", arguments);
+        logger.debug("Sox arguments: {}", arguments);
         ProcessBuilder processBuilder = new ProcessBuilder(arguments);
         processBuilder.redirectErrorStream(true);
         Process process = null;
@@ -133,7 +133,7 @@ public class SoX {
             }
         } catch (IOException e) {
             errorDuringExecution = e;
-            logger.error("Error while running SoX. {}", e.getMessage());
+            logger.error("Error while running Sox. {}", e.getMessage());
         } finally {
             if (process != null) {
                 process.destroy();

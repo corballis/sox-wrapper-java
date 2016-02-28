@@ -28,7 +28,7 @@ The code below represents the following code in the CLI:
 ```sox --rate 16000 input.wav --encoding signed-integer --bits 16 output.wav remix 1 ```
 
 ```
-SoX sox = new SoX("/usr/bin/sox");
+Sox sox = new Sox("/usr/bin/sox");
         sox
             .sampleRate(16000)
             .inputFile("input.wav")
@@ -45,7 +45,7 @@ SoX sox = new SoX("/usr/bin/sox");
 If an argument, you are looking for is not implemented yet, feel free to open an issue, or simply use the
  `SoX argument(String ...args)` method to pass custom arguments to the sox.
 ```
-SoX sox = new SoX("/usr/bin/sox");
+Sox sox = new Sox("/usr/bin/sox");
         sox.argument("--myargumentKey", "myArgumentValue")
             .inputFile("input.wav")
             .outputFile("output.wav")
@@ -64,8 +64,8 @@ import org.springframework.context.annotation.Configuration;
 public class SoXConfiguration {
 
     @Bean(id="sox" scope="prototype")
-    public SoX sox() {
-        SoX sox = new SoX("/usr/bin/sox");
+    public Sox sox() {
+        Sox sox = new Sox("/usr/bin/sox");
         return sox;
     }
 ```
