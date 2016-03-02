@@ -5,6 +5,8 @@
     <groupId>ie.corballis</groupId>
     <artifactId>sox-java</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>Sox wrapper for java</name>
     <url>https://github.com/corballis/sox-wrapper-java</url>
 
     <licenses>
@@ -14,6 +16,10 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <description>
+        Java wrapper around the famous sox audio processing tool.
+    </description>
 
     <developers>
         <developer>
@@ -27,8 +33,8 @@
         <connection>scm:git:git@github.com:corballis/sox-wrapper-java.git</connection>
         <url>scm:git:git@github.com:corballis/sox-wrapper-java.git</url>
         <developerConnection>scm:git:git@github.com:corballis/sox-wrapper-java.git</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <properties>
         <slf4j-api.version>1.7.8</slf4j-api.version>
