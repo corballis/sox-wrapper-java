@@ -1,4 +1,4 @@
-# sox-wrapper-java
+# Sox wrapper for java
 Java wrapper around the famous [sox](https://sourceforge.net/projects/sox/) audio processing tool.
 Please note that the sox executable is not part of this project. This is a wrapper application only that points to the
 executable.
@@ -15,9 +15,9 @@ Have a nice coding :)
 
 ```
 <dependency>
-    <groupId>ie.corballis</groupId>
-    <artifactId>sox-wrapper-java</artifactId>
-    <version>1.0-SNAPSHOT</version>
+  <groupId>ie.corballis</groupId>
+  <artifactId>sox-java</artifactId>
+  <version>1.0.0</version>
 </dependency>
 ```
 
