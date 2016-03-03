@@ -60,17 +60,23 @@ Sox sox = new Sox("/usr/bin/sox");
 This is a recommendation, how to integrate the sox java wrapper with the Spring Framework
 
 ```
+import ie.corballis.sox.Sox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 @Configuration
-public class SoXConfiguration {
+public class SoxConfiguration {
 
-    @Bean(id="sox" scope="prototype")
+    @Bean(name = "sox")
+    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public Sox sox() {
-        Sox sox = new Sox("/usr/bin/sox");
-        return sox;
+        return new Sox("<sox-binary-full-path>");
     }
+}
+
 ```
 
 With the above described Spring configuration class you can inject the sox wrapper anywhere in you Spring project like this:
