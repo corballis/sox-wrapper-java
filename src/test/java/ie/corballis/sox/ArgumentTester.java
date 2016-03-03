@@ -31,4 +31,10 @@ public class ArgumentTester {
                 "1");
         assertEquals(expectedArguments, arguments);
     }
+
+    @Test(expected = WrongParametersException.class)
+    public void testOutputParamHasToFollowInputParam() throws WrongParametersException {
+        Sox sox = new Sox("/usr/local/bin/sox");
+        sox.outputFile("").inputFile("");
+    }
 }

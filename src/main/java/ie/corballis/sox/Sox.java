@@ -1,9 +1,9 @@
 package ie.corballis.sox;
 
-import java.io.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -81,9 +81,7 @@ public class Sox {
 
     public Sox effect(SoXEffect effect, String ... effectArguments) {
         arguments.add(effect.toString());
-        for (String effectArgument : effectArguments) {
-            arguments.add(effectArgument);
-        }
+        Collections.addAll(arguments, effectArguments);
         return this;
     }
 
@@ -94,11 +92,12 @@ public class Sox {
 
     public Sox inputFile(String inputFile) {
         arguments.add(inputFile);
+        inputFileSet = true;
         return this;
     }
 
     public Sox outputFile(String outputFile) throws WrongParametersException {
-        if (inputFileSet) {
+        if (!inputFileSet) {
             throw new WrongParametersException("The output file has to be later then an input file");
         }
         arguments.add(outputFile);
@@ -106,10 +105,7 @@ public class Sox {
         return this;
     }
 
-    public void execute() throws IOException, WrongParametersException, AlreadyExecutedException {
-        if (hasBeenExecuted) {
-            throw new AlreadyExecutedException("The execute() method cannot be called twice");
-        }
+    public void execute() throws IOException, WrongParametersException {
         File soxBinary = new File(soXBinaryPath);
         if (!soxBinary.exists()) {
             throw new FileNotFoundException("Sox binary is not available under the following path: " + soXBinaryPath);
@@ -135,6 +131,7 @@ public class Sox {
             errorDuringExecution = e;
             logger.error("Error while running Sox. {}", e.getMessage());
         } finally {
+            arguments.clear();
             if (process != null) {
                 process.destroy();
             }
