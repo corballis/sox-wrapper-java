@@ -1,9 +1,9 @@
 package ie.corballis.sox;
 
-import java.io.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,8 +19,6 @@ public class Sox {
     private boolean globalOptionSet = false;
 
     private boolean formatOptionSet = false;
-
-    private boolean inputFileSet = false;
 
     private boolean outputFileSet = false;
 
@@ -92,15 +90,15 @@ public class Sox {
         return this;
     }
 
-    public Sox inputFile(String inputFile) {
+    public Sox inputFile(String inputFile) throws WrongParametersException {
+        if (outputFileSet) {
+            throw new WrongParametersException("The output file has to be later then an input file");
+        }
         arguments.add(inputFile);
         return this;
     }
 
     public Sox outputFile(String outputFile) throws WrongParametersException {
-        if (inputFileSet) {
-            throw new WrongParametersException("The output file has to be later then an input file");
-        }
         arguments.add(outputFile);
         outputFileSet = true;
         return this;

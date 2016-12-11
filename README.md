@@ -17,7 +17,7 @@ Have a nice coding :)
 <dependency>
     <groupId>ie.corballis</groupId>
     <artifactId>sox-wrapper-java</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>xxx</version>
 </dependency>
 ```
 
