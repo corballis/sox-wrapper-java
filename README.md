@@ -1,4 +1,4 @@
-# sox-wrapper-java
+# Sox wrapper for java
 Java wrapper around the famous [sox](https://sourceforge.net/projects/sox/) audio processing tool.
 Please note that the sox executable is not part of this project. This is a wrapper application only that points to the
 executable.
@@ -15,9 +15,9 @@ Have a nice coding :)
 
 ```
 <dependency>
-    <groupId>ie.corballis</groupId>
-    <artifactId>sox-wrapper-java</artifactId>
-    <version>xxx</version>
+  <groupId>ie.corballis</groupId>
+  <artifactId>sox-java</artifactId>
+  <version>1.0.1</version>
 </dependency>
 ```
 
@@ -40,10 +40,13 @@ Sox sox = new Sox("/usr/bin/sox");
     }
 ```
 
-### Pass unimplemented arguments to the sox
+### Don't find your favorite sox argument implemented yet?
 
-If an argument, you are looking for is not implemented yet, feel free to open an issue, or simply use the
- `SoX argument(String ...args)` method to pass custom arguments to the sox.
+If an argument, you are looking for is not implemented yet, feel free to open an issue, but don't worry.
+You do not need to wait for a new version. you can always use the following "universal" method for such a cases:
+ `SoX argument(String ...args)`
+The above mentioned method accepts any kind of custom arguments and passes it straight to the sox.
+
 ```
 Sox sox = new Sox("/usr/bin/sox");
         sox.argument("--myargumentKey", "myArgumentValue")
@@ -57,19 +60,31 @@ Sox sox = new Sox("/usr/bin/sox");
 This is a recommendation, how to integrate the sox java wrapper with the Spring Framework
 
 ```
+import ie.corballis.sox.Sox;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 @Configuration
-public class SoXConfiguration {
+public class SoxConfiguration {
 
-    @Bean(id="sox" scope="prototype")
+    @Bean(name = "sox")
+    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public Sox sox() {
-        Sox sox = new Sox("/usr/bin/sox");
-        return sox;
+        return new Sox("<sox-binary-full-path>");
     }
+}
+
 ```
 
 With the above described Spring configuration class you can inject the sox wrapper anywhere in you Spring project like this:
 
 ```@Autowired private SoX sox;``` and the framework will initialize a new wrapper for you.
+
+## Does the order of the arguments matter?
+Yes, it does. However, this java wrapper allows you any kind of order of the sox parameters, it does not check sox'
+syntax, the wrapper will pass the arguments to sox in the same order as you provided them in the java code.
+The wrapper checks only one syntax: You have to provide your output parameter later than your input parameter.
+If you break this rule, then you will get a `WrongParameterException` checked exception.

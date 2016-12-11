@@ -20,6 +20,8 @@ public class Sox {
 
     private boolean formatOptionSet = false;
 
+    private boolean inputFileSet = false;
+
     private boolean outputFileSet = false;
 
     private boolean hasBeenExecuted = false;
@@ -79,9 +81,7 @@ public class Sox {
 
     public Sox effect(SoXEffect effect, String ... effectArguments) {
         arguments.add(effect.toString());
-        for (String effectArgument : effectArguments) {
-            arguments.add(effectArgument);
-        }
+        Collections.addAll(arguments, effectArguments);
         return this;
     }
 
@@ -104,10 +104,7 @@ public class Sox {
         return this;
     }
 
-    public void execute() throws IOException, WrongParametersException, AlreadyExecutedException {
-        if (hasBeenExecuted) {
-            throw new AlreadyExecutedException("The execute() method cannot be called twice");
-        }
+    public void execute() throws IOException, WrongParametersException {
         File soxBinary = new File(soXBinaryPath);
         if (!soxBinary.exists()) {
             throw new FileNotFoundException("Sox binary is not available under the following path: " + soXBinaryPath);
@@ -133,6 +130,7 @@ public class Sox {
             errorDuringExecution = e;
             logger.error("Error while running Sox. {}", e.getMessage());
         } finally {
+            arguments.clear();
             if (process != null) {
                 process.destroy();
             }
