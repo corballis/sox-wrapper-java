@@ -4,7 +4,7 @@
 
     <groupId>ie.corballis</groupId>
     <artifactId>sox-java</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
     <name>Sox wrapper for java</name>
     <url>https://github.com/corballis/sox-wrapper-java</url>
@@ -33,7 +33,7 @@
         <connection>scm:git:git@github.com:corballis/sox-wrapper-java.git</connection>
         <url>scm:git:git@github.com:corballis/sox-wrapper-java.git</url>
         <developerConnection>scm:git:git@github.com:corballis/sox-wrapper-java.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>sox-java-1.0.2</tag>
   </scm>
 
     <properties>
