@@ -92,7 +92,7 @@ public class Sox {
 
     public Sox inputFile(String inputFile) throws WrongParametersException {
         if (outputFileSet) {
-            throw new WrongParametersException("The output file has to be later then an input file");
+            throw new WrongParametersException("The output file has to be later then an input file. Arguments: " + arguments.toString());
         }
         arguments.add(inputFile);
         return this;
@@ -111,7 +111,7 @@ public class Sox {
         }
 
         if (!outputFileSet) {
-            throw new WrongParametersException("The output file argument is missing");
+            throw new WrongParametersException("The output file argument is missing. Arguments: " + arguments.toString());
         }
         arguments.add(0, soXBinaryPath);
         logger.debug("Sox arguments: {}", arguments);
@@ -140,8 +140,7 @@ public class Sox {
             errorDuringExecution = e;
             logger.error("Error while running Sox. {}", e.getMessage());
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("Error while running Sox. {}", e.getMessage());
         } finally {
             arguments.clear();
             if (process != null) {

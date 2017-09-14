@@ -17,7 +17,7 @@ Have a nice coding :)
 <dependency>
   <groupId>ie.corballis</groupId>
   <artifactId>sox-java</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.4</version>
 </dependency>
 ```
 
@@ -70,10 +70,9 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class SoxConfiguration {
 
-    @Bean(name = "sox")
-    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public Sox sox() {
-        return new Sox("<sox-binary-full-path>");
+    @Bean(name = "soxFactory")
+    public SoxFactory soxFactory() {
+        return new SoxFactory("<sox-binary-full-path>");
     }
 }
 
@@ -81,7 +80,14 @@ public class SoxConfiguration {
 
 With the above described Spring configuration class you can inject the sox wrapper anywhere in you Spring project like this:
 
-```@Autowired private SoX sox;``` and the framework will initialize a new wrapper for you.
+```
+@Autowired private SoXFactory soxFactory; 
+
+...
+
+// My lovely sox command 
+soxFactory.getInstance().inputFile('myFile').outputFile('outputFile').execute();
+```
 
 ## Does the order of the arguments matter?
 Yes, it does. However, this java wrapper allows you any kind of order of the sox parameters, it does not check sox'
