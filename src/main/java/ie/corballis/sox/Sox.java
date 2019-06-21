@@ -121,21 +121,22 @@ public class Sox {
         IOException errorDuringExecution = null;
         try {
             process = processBuilder.start();
-            process.waitFor();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
+            List<String> lines = new ArrayList<String>();
+            String currentLine;
+            while ((currentLine = reader.readLine()) != null) {
+                lines.add(currentLine);
+            }
+            process.waitFor();
             if (process.exitValue() != 0) {
-                while ((line = reader.readLine()) != null) {
+                for (String line : lines) {
                     logger.error(line);
                 }
-            }
-            else {
-                while ((line = reader.readLine()) != null) {
+            } else {
+                for (String line : lines) {
                     logger.debug(line);
                 }
             }
-
-
         } catch (IOException e) {
             errorDuringExecution = e;
             logger.error("Error while running Sox. {}", e.getMessage());
