@@ -469,6 +469,12 @@ public enum AudioFileFormat {
             return "ul";
         }
     },
+    ULAW {
+        @Override
+        public String toString() {
+            return "ulaw";
+        }
+    },
     UW {
         @Override
         public String toString() {
